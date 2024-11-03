@@ -10,7 +10,10 @@ const montserrat = Montserrat({
 })
 
 export const metadata = {
-	title: 'myHobby',
+	title: {
+		template: '%s | myHobby',
+		default: 'myHobby'
+	},
 	description: 'myHobby but it is connected to Wordpress cms',
 }
 

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import styles from './Footer.module.scss'
+import Wrapper from '../Wrapper/Wrapper'
 
 const links_Websites_School_Friends = [
 	{
@@ -65,28 +66,32 @@ export default function Footer() {
 	const accountLink = 'https://github.com/Matrix669'
 	return (
 		<footer className={styles.footer}>
-			<div className={styles.footer__contactBox}>
-				<h3>Linki do stron od kolegów z klasy :D</h3>
-				<ul>
-					{links_Websites_School_Friends.map(link => {
-						return (
-							<li key={link.name}>
-								<Link href={link.href} target='_blank'>{link.name}</Link>
-							</li>
-						)
-					})}
-				</ul>
-			</div>
-			<div className={styles.footer__infos}>
-				<p>
-					© {year} Created by{' '}
-					<Link target='_blank' href={accountLink}>
-						Maks
-					</Link>
-				</p>
-				<a href='tel+48 420 692 137'>+48 420 692 137</a>
-				<a href='mailto:hau@mail.pl'>hau@mail.pl</a>
-			</div>
+			<Wrapper>
+				<div className={styles.footer__contactBox}>
+					<h3>Linki do stron od kolegów z klasy :D</h3>
+					<ul>
+						{links_Websites_School_Friends.map(link => {
+							return (
+								<li key={link.name}>
+									<Link href={link.href} target='_blank'>
+										{link.name}
+									</Link>
+								</li>
+							)
+						})}
+					</ul>
+				</div>
+				<div className={styles.footer__infos}>
+					<a href='tel+48 420 692 137'>+48 420 692 137</a>
+					<a href='mailto:hau@mail.pl'>hau@mail.pl</a>
+					<p>
+						© {year} Created by{' '}
+						<Link target='_blank' href={accountLink}>
+							Maks
+						</Link>
+					</p>
+				</div>
+			</Wrapper>
 		</footer>
 	)
 }

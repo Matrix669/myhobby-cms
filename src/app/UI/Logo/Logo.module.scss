@@ -1,0 +1,13 @@
+@use '../../styles/colors' as *;
+@use '../../styles/functions' as *;
+.logo {
+	color: $white;
+	font-weight: 700;
+	font-size: rem(22);
+	&:hover span {
+		color: $deep-heaven;
+	}
+	& span {
+		text-transform: uppercase;
+	}
+}

@@ -1,16 +1,12 @@
 'use client'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import Wrapper from '../Wrapper/Wrapper'
 
 import { RiArrowDropDownLine } from 'react-icons/ri'
 import styles from './Navigation.module.scss'
-
-const mobileNav = [
-	{
-		
-	}
-]
+import Wrapper from '../Wrapper/Wrapper'
+import Logo from '../Logo/Logo'
+import BurgerBtn from '../BurgerBtn/BurgerBtn'
 
 export default function Navigation() {
 	const [activeMobileMenu, setActiveMenu] = useState(false)
@@ -43,15 +39,82 @@ export default function Navigation() {
 			window.removeEventListener('scroll', handleShadowNav)
 		}
 	}, [])
-
+	const mobileNav = [
+		{
+			name: 'Hobby',
+			href: '/',
+			dropdownLinks: [
+				{
+					name: 'Badminton',
+					href: '/#badminton',
+					onClick: closeMobileMenu,
+				},
+				{
+					name: 'Piłka nożna',
+					href: '/#pilka-nozna',
+					onClick: closeMobileMenu,
+				},
+				{
+					name: 'Programowanie',
+					href: '/#programowanie',
+					onClick: closeMobileMenu,
+				},
+			],
+		},
+		{
+			name: 'Moje projekty',
+			href: '/',
+			onClick: closeMobileMenu,
+		},
+		{
+			name: 'Zadania',
+			href: '/',
+			onClick: closeMobileMenu,
+		},
+		{
+			name: 'Kontakt',
+			href: '/#kontakt',
+			onClick: closeMobileMenu,
+		},
+	]
+	const desktopNav = [
+		{
+			name: 'Hobby',
+			href: '/',
+			dropdownLinks: [
+				{
+					name: 'Badminton',
+					href: '/#badminton',
+				},
+				{
+					name: 'Piłka nożna',
+					href: '/#pilka-nozna',
+				},
+				{
+					name: 'Programowanie',
+					href: '/#programowanie',
+				},
+			],
+		},
+		{
+			name: 'Moje projekty',
+			href: '/',
+		},
+		{
+			name: 'Zadania',
+			href: '/',
+		},
+		{
+			name: 'Kontakt',
+			href: '/#kontakt',
+		},
+	]
 	return (
 		<nav className={`${styles.nav} ${navShadow ? styles.navShadow : ''}`}>
 			<Wrapper>
 				<div className={styles.nav__inner}>
-					<Link className={styles.navBrand} href={'/'}>
-						my<span>Hobby</span>
-					</Link>
-					<ul className={`${styles.navMobile} ${activeMobileMenu ? styles.navActive : ''}`}>
+					<Logo />
+					{/* <ul className={`${styles.navMobile} ${activeMobileMenu ? styles.navActive : ''}`}>
 						<li>
 							<Link onClick={() => toggleDropdown('dropdown1')} className={styles.navDropdownLink} href={'/'}>
 								Hobby <RiArrowDropDownLine size='2em' />
@@ -91,10 +154,39 @@ export default function Navigation() {
 								Kontakt
 							</Link>
 						</li>
+					</ul> */}
+					<ul className={`${styles.navMobile} ${activeMobileMenu ? styles.navActive : ''}`}>
+						{mobileNav.map((link, i) => {
+							return (
+								<li key={link.name}>
+									<Link
+										className={link.dropdownLinks ? styles.navDropdownLink : ''}
+										onClick={link.dropdownLinks ? () => toggleDropdown(i) : link.onClick}
+										href={link.href}
+										title={link.name}
+									>
+										{link.name} {link.dropdownLinks && <RiArrowDropDownLine size='2em' />}
+									</Link>
+									{activeDropDownMobile === i && link.dropdownLinks && (
+										<ul>
+											{link.dropdownLinks?.map(linkDropdown => {
+												return (
+													<li key={linkDropdown.name}>
+														<Link title={linkDropdown.name} onClick={linkDropdown.onClick} href={linkDropdown.href}>
+															{linkDropdown.name}
+														</Link>
+													</li>
+												)
+											})}
+										</ul>
+									)}
+								</li>
+							)
+						})}
 					</ul>
-					<ul className={styles.navDesktop}>
+					{/* <ul className={styles.navDesktop}>
 						<li className={styles.navDesktopDropdownLi}>
-							<Link className={styles.navDropdownLink} href={'#'} onClick={e=>e.preventDefault()}>
+							<Link className={styles.navDropdownLink} href={'#'} onClick={e => e.preventDefault()}>
 								Hobby <RiArrowDropDownLine size='2em' />
 							</Link>
 							<ul>
@@ -118,12 +210,32 @@ export default function Navigation() {
 						<li>
 							<Link href={'/'}>Kontakt</Link>
 						</li>
+					</ul> */}
+					<ul className={styles.navDesktop}>
+						{desktopNav.map(link => {
+							return (
+								<li key={link.name} className={link.dropdownLinks ? styles.navDesktopDropdownLi : ''}>
+									<Link className={link.dropdownLinks ? styles.navDropdownLink : ''} title={link.name} href={link.href}>
+										{link.name} {link.dropdownLinks && <RiArrowDropDownLine size='2em' />}
+									</Link>
+									{link.dropdownLinks && (
+										<ul>
+											{link.dropdownLinks?.map(linkDropdown => {
+												return (
+													<li key={linkDropdown.name}>
+														<Link title={linkDropdown.name} href={linkDropdown.href}>
+															{linkDropdown.name}
+														</Link>
+													</li>
+												)
+											})}
+										</ul>
+									)}
+								</li>
+							)
+						})}
 					</ul>
-					<button className={styles.navBurgerBtn} onClick={handleNavMobile}>
-						<div className={styles.navBurgerBtn__Box}>
-							<div className={styles.navBurgerBtn__Bars}></div>
-						</div>
-					</button>
+					<BurgerBtn onClick={handleNavMobile} />
 				</div>
 			</Wrapper>
 		</nav>
