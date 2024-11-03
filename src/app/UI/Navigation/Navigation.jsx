@@ -6,6 +6,12 @@ import Wrapper from '../Wrapper/Wrapper'
 import { RiArrowDropDownLine } from 'react-icons/ri'
 import styles from './Navigation.module.scss'
 
+const mobileNav = [
+	{
+		
+	}
+]
+
 export default function Navigation() {
 	const [activeMobileMenu, setActiveMenu] = useState(false)
 	const [activeDropDownMobile, setDropDownMobile] = useState(null)
@@ -88,7 +94,7 @@ export default function Navigation() {
 					</ul>
 					<ul className={styles.navDesktop}>
 						<li className={styles.navDesktopDropdownLi}>
-							<Link className={styles.navDropdownLink} href={'/'}>
+							<Link className={styles.navDropdownLink} href={'#'} onClick={e=>e.preventDefault()}>
 								Hobby <RiArrowDropDownLine size='2em' />
 							</Link>
 							<ul>

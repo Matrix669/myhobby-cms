@@ -1,0 +1,82 @@
+@use '../../styles/colors' as *;
+@use '../../styles/functions' as *;
+
+.footer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+	color: $white;
+	height: 20%;
+	background-color: $black;
+	padding: rem(32);
+	&__contactBox {
+		& h3 {
+			font-weight: normal;
+			font-size: rem(20);
+			margin-bottom: rem(16);
+		}
+		& ul {
+			& li a {
+                font-size: rem(18);
+                margin: rem(10) 0;
+				&:hover {
+					color: #8b8c89;
+				}
+                &:visited {
+                    color: $deep-heaven;
+                }
+			}
+		}
+	}
+	&__infos {
+        margin-top: rem(16);
+		& p a {
+			display: inline-block;
+			border-bottom: 1px dashed $white;
+			font-size: rem(18);
+			color: $deep-heaven;
+            margin: 0;
+			&:hover {
+				color: $white;
+				border-bottom: 1px solid $white;
+			}
+		}
+        & a {
+            margin: rem(10) 0;
+            &:hover {
+                color: $deep-heaven;
+            }
+        }
+	}
+}
+
+@media (min-width: rem(768)) {
+ .footer {
+    &__contactBox {
+        & h3 {
+            font-size: rem(26);
+        }
+        & ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: rem(10);
+        }
+    }
+ }   
+}
+
+@media (min-width: rem(992)) {
+ .footer {
+    &__contactBox {
+
+        & ul {
+            & li a {
+                font-size: rem(20);
+            }
+        }
+    }
+ }   
+}

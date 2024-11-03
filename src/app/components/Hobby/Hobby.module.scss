@@ -1,5 +1,6 @@
 @use '../../styles/colors' as *;
 @use '../../styles/functions' as *;
+@use '../../styles/components' as *;
 .hobby {
     display: flex;
     align-items: center;
@@ -49,6 +50,7 @@
     .hobby {
         &__inner {
             display: flex;
+            align-items: flex-start;
             gap: rem(24);
             & img {
                 width: 50%;
