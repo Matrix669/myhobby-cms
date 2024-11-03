@@ -1,0 +1,16 @@
+@use '../../styles/colors' as *;
+@use '../../styles/functions' as *;
+@use '../../styles/components' as *;
+.heroBtn {
+    padding: rem(18) rem(36);
+    color: $white;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid $deep-heaven;
+    border-radius: 6px;
+    transition: background-color .3s;
+    &:hover {
+        background-color: $on-hover;
+        border-color: $on-hover;
+    }
+}

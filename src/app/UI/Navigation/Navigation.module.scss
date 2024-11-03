@@ -2,11 +2,19 @@
 @use '../../styles/functions' as *;
 @use '../../styles/components' as *;
 .nav {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	height: 90px;
-	padding: 0 rem(15);
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	transition: background-color 0.3s;
+	z-index: 100;
+	&__inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 90px;
+		padding: 0 rem(15);
+	}
 	&DropdownLink {
 		display: flex;
 		align-items: center;
@@ -25,7 +33,7 @@
 	&Brand {
 		color: $white;
 		font-weight: 700;
-		font-size: rem(26);
+		font-size: rem(22);
 		&:hover span {
 			color: $deep-heaven;
 		}
@@ -120,15 +128,10 @@
 }
 
 .navShadow {
-	position: fixed;
-	top: 0;
-	right: 0;
-	left: 0;
 	background-color: rgba(53, 53, 53, 0.8);
 }
 
 @media (min-width: rem(768)) {
-	// ON DESKTOP
 	.nav {
 		&Desktop {
 			display: flex;
@@ -136,10 +139,10 @@
 			gap: rem(24);
 			&DropdownLi {
 				position: relative;
-                &:hover ul {
-                    opacity: 1;
-                    transform: scaleY(1);
-                }
+				&:hover ul {
+					opacity: 1;
+					transform: scaleY(1);
+				}
 				& ul {
 					position: absolute;
 					top: 93px;
@@ -149,11 +152,11 @@
 					text-align: center;
 					background-color: $on-hover;
 					transform-origin: 50% 0;
-					transition:  opacity 0.3s, transform 0.3s;
-                    & li a {
-                        padding: rem(14);
-                        margin: rem(8);
-                    }
+					transition: opacity 0.3s, transform 0.3s;
+					& li a {
+						padding: rem(14);
+						margin: rem(8);
+					}
 				}
 			}
 
@@ -167,7 +170,7 @@
 					content: '';
 					position: absolute;
 					width: 0;
-					bottom: 15px;
+					bottom: 5px;
 					border-bottom: 2px solid $deep-heaven;
 				}
 				&::before {

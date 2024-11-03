@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Wrapper from '../Wrapper/Wrapper'
 
@@ -9,6 +9,7 @@ import styles from './Navigation.module.scss'
 export default function Navigation() {
 	const [activeMobileMenu, setActiveMenu] = useState(false)
 	const [activeDropDownMobile, setDropDownMobile] = useState(null)
+	const [navShadow, setNavShadow] = useState(false)
 
 	function handleNavMobile() {
 		setActiveMenu(prev => !prev)
@@ -22,10 +23,25 @@ export default function Navigation() {
 	function closeMobileMenu() {
 		setActiveMenu(false)
 	}
+	useEffect(() => {
+		const handleShadowNav = () => {
+			if (window.scrollY >= 300) {
+				setNavShadow(true)
+			} else {
+				setNavShadow(false)
+			}
+		}
+
+		window.addEventListener('scroll', handleShadowNav)
+		return () => {
+			window.removeEventListener('scroll', handleShadowNav)
+		}
+	}, [])
+
 	return (
-		<nav className={styles.navShadow}>
+		<nav className={`${styles.nav} ${navShadow ? styles.navShadow : ''}`}>
 			<Wrapper>
-				<div className={styles.nav}>
+				<div className={styles.nav__inner}>
 					<Link className={styles.navBrand} href={'/'}>
 						my<span>Hobby</span>
 					</Link>

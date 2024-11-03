@@ -4,7 +4,7 @@ import './globals.scss'
 import { Montserrat } from 'next/font/google'
 
 const montserrat = Montserrat({
-	weight: ['400', '700'],
+	weight: ['300', '400', '700'],
 	style: ['normal'],
 	subsets: ['latin'],
 })
