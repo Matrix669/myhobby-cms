@@ -7,7 +7,7 @@ export default function MainPageContent() {
 			<section className={styles.sectionPadding}>
 				<Hobbies />
 			</section>
-			<section className={styles.sectionPadding}>
+			<section className={styles.sectionPadding} id='kontakt'>
 				<ContactForm />
 			</section>
 		</main>

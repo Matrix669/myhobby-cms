@@ -1,6 +1,7 @@
 @use '../../styles/colors' as *;
 @use '../../styles/functions' as *;
 @use '../../styles/components' as *;
+@use '../../styles/animations' as *;
 
 .form {
 	display: flex;
@@ -21,7 +22,7 @@
 		}
 		& input {
 			width: 100%;
-			min-height: 46px;
+			min-height: 49px;
 			padding: rem(10) rem(15);
 			&:focus ~ label {
 				transform: translateY(-85%) scale(0.9);
@@ -29,16 +30,32 @@
 				color: $black;
 				background-color: $white;
 			}
+			&:valid ~ label {
+				transform: translateY(-85%) scale(0.9);
+				font-size: rem(14);
+				background-color: $white;
+			}
 		}
 		& textarea {
 			resize: vertical;
 			min-height: rem(200);
+			padding: rem(10) rem(15);
 			&:focus ~ label {
 				transform: translateY(-85%) scale(0.9);
 				font-size: rem(14);
 				color: $black;
 				background-color: $white;
 			}
+			&:valid ~ label {
+				transform: translateY(-85%) scale(0.9);
+				font-size: rem(14);
+				background-color: $white;
+			}
+		}
+		&:focus input,
+		&:focus textarea {
+			outline: none;
+			border: 2px solid $black;
 		}
 	}
 	& button {
@@ -48,19 +65,53 @@
 		font-size: rem(18);
 		background-color: $black;
 		border: none;
-		transition: border-top-left-radius .3s, border-bottom-right-radius .3s, background-color .3s;
-        &:hover {
-            border-top-left-radius: 36px;
-            border-bottom-right-radius: 36px;
-            background-color: $deep-heaven;
-        }
+		transition: border-top-left-radius 0.3s, border-bottom-right-radius 0.3s, background-color 0.3s;
+		&:hover {
+			border-top-left-radius: 36px;
+			border-bottom-right-radius: 36px;
+			background-color: $deep-heaven;
+		}
 	}
+	&Error {
+		align-self: flex-start;
+		font-size: rem(14);
+		color: #f00;
+		margin-top: rem(-10);
+		margin-bottom: rem(25);
+	}
+	&SubmittedText,
+	&TextError {
+		position: fixed;
+		bottom: 10%;
+		right: 0;
+		align-self: flex-start;
+		padding: rem(15);
+		margin-top: rem(35);
+		font-size: 14px;
+		color: $black;
+		transform: translateX(100%);
+	}
+	&SubmittedText {
+		background-color: #adeebc;
+	}
+	&TextError {
+		background-color: tomato;
+	}
+}
+.emailValid {
+	& ~ label {
+		transform: translateY(-85%) scale(0.9);
+		font-size: rem(14);
+		background-color: $white;
+	}
+}
+.inputError {
+	border: 2px solid rgba(255, 0, 0, 0.633);
 }
 
 @media (min-width: rem(992)) {
-    .form {
-        &Box, & button {
-            width: 80%;
-        }
-    }
+	.form {
+		width: 80%;
+		margin: 0 auto;
+	}
 }

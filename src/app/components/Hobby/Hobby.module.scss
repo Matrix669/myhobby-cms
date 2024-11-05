@@ -11,15 +11,6 @@
             flex-direction: row-reverse;
         }
     }
-    & h2 {
-        position: relative;
-        margin-bottom: rem(60);
-        font-weight: 300;
-        font-size: rem(24);
-        text-transform: uppercase;
-        color: $black;
-        letter-spacing: 2px;
-    }
     &__inner img {
         width: 100%;
     }
@@ -34,13 +25,7 @@
         }
     }
 }
-@media (min-width: rem(414)) {
-    .hobby {
-        & h2 {
-            font-size: rem(30);
-        }
-    }
-}
+
 
 @media (min-width: rem(768)) {
     .hobby {
