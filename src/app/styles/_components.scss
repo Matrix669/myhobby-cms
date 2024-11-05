@@ -1,10 +1,11 @@
 @use './colors' as *;
+@use './functions' as *;
 .line {
 	&::before {
 		content: '';
 		position: absolute;
 		bottom: -10px;
-        right: 5%;		
+		right: 5%;
 		width: 100px;
 
 		height: 2px;
@@ -14,12 +15,22 @@
 		content: '';
 		position: absolute;
 		top: -10px;
-        left: 5%;
+		left: 5%;
 		width: 100px;
 		height: 2px;
 		background-color: $on-hover;
 	}
 }
 .sectionPadding {
-    padding: 4em 2em;
+	padding: 4em 2em;
+}
+
+.titleSection {
+	position: relative;
+	margin-bottom: rem(60);
+	font-weight: 300;
+	font-size: rem(24);
+	text-transform: uppercase;
+	color: $black;
+	letter-spacing: 2px;
 }

@@ -1,0 +1,66 @@
+@use '../../styles/colors' as *;
+@use '../../styles/functions' as *;
+@use '../../styles/components' as *;
+
+.form {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	&Box {
+		position: relative;
+		width: 100%;
+		margin-bottom: rem(20);
+		& label {
+			position: absolute;
+			top: 9px;
+			left: 16px;
+			color: $gray;
+			padding: rem(5);
+			transition: transform 0.3s, font-size 0.3s, background-color 0.3s;
+			pointer-events: none;
+		}
+		& input {
+			width: 100%;
+			min-height: 46px;
+			padding: rem(10) rem(15);
+			&:focus ~ label {
+				transform: translateY(-85%) scale(0.9);
+				font-size: rem(14);
+				color: $black;
+				background-color: $white;
+			}
+		}
+		& textarea {
+			resize: vertical;
+			min-height: rem(200);
+			&:focus ~ label {
+				transform: translateY(-85%) scale(0.9);
+				font-size: rem(14);
+				color: $black;
+				background-color: $white;
+			}
+		}
+	}
+	& button {
+		width: 100%;
+		padding: rem(18) rem(36);
+		color: $white;
+		font-size: rem(18);
+		background-color: $black;
+		border: none;
+		transition: border-top-left-radius .3s, border-bottom-right-radius .3s, background-color .3s;
+        &:hover {
+            border-top-left-radius: 36px;
+            border-bottom-right-radius: 36px;
+            background-color: $deep-heaven;
+        }
+	}
+}
+
+@media (min-width: rem(992)) {
+    .form {
+        &Box, & button {
+            width: 80%;
+        }
+    }
+}
