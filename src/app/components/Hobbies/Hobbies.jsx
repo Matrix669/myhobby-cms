@@ -3,7 +3,7 @@ import BADMINTON from '../../assets/badminton.png'
 import FOOTBALL from '../../assets/football-1486353_640-small.jpg'
 import PROGRAMMING from '../../assets/programming-1873854_640.png'
 import Hobby from '../Hobby/Hobby'
-
+import styles from './Hobbies.module.scss'
 const HOBBYS = [
 	{
 		id: 'badminton',
@@ -32,20 +32,22 @@ const HOBBYS = [
 ]
 export default function Hobbies() {
 	return (
-		<Wrapper>
-			{HOBBYS.map(hobby => {
-				return (
-					<Hobby
-						key={hobby.id}
-						id={hobby.id}
-						imgSrc={hobby.imgSrc}
-						subTitle={hobby.subTitle}
-						text={hobby.text}
-						title={hobby.title}
-						alt={hobby.alt}
-					/>
-				)
-			})}
-		</Wrapper>
+		<section className={styles.sectionPadding}>
+			<Wrapper>
+				{HOBBYS.map(hobby => {
+					return (
+						<Hobby
+							key={hobby.id}
+							id={hobby.id}
+							imgSrc={hobby.imgSrc}
+							subTitle={hobby.subTitle}
+							text={hobby.text}
+							title={hobby.title}
+							alt={hobby.alt}
+						/>
+					)
+				})}
+			</Wrapper>
+		</section>
 	)
 }

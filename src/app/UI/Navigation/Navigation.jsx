@@ -7,11 +7,16 @@ import styles from './Navigation.module.scss'
 import Wrapper from '../Wrapper/Wrapper'
 import Logo from '../Logo/Logo'
 import BurgerBtn from '../BurgerBtn/BurgerBtn'
+import { useNavHeight } from '@/app/components/contexts/NavHeightContext'
+import { usePathname } from 'next/navigation'
 
 export default function Navigation() {
 	const [activeMobileMenu, setActiveMenu] = useState(false)
 	const [activeDropDownMobile, setDropDownMobile] = useState(null)
 	const [navShadow, setNavShadow] = useState(false)
+	const { navRef } = useNavHeight()
+	const pathname = usePathname()
+	const isHomePage = pathname === '/'
 
 	function handleNavMobile() {
 		setActiveMenu(prev => !prev)
@@ -25,6 +30,7 @@ export default function Navigation() {
 	function closeMobileMenu() {
 		setActiveMenu(false)
 	}
+
 	useEffect(() => {
 		const handleShadowNav = () => {
 			if (window.scrollY >= 300) {
@@ -63,12 +69,12 @@ export default function Navigation() {
 		},
 		{
 			name: 'Moje projekty',
-			href: '/',
+			href: '/moje-projekty',
 			onClick: closeMobileMenu,
 		},
 		{
 			name: 'Zadania',
-			href: '/',
+			href: '/zadania',
 			onClick: closeMobileMenu,
 		},
 		{
@@ -98,11 +104,11 @@ export default function Navigation() {
 		},
 		{
 			name: 'Moje projekty',
-			href: '/',
+			href: '/moje-projekty',
 		},
 		{
 			name: 'Zadania',
-			href: '/',
+			href: '/zadania',
 		},
 		{
 			name: 'Kontakt',
@@ -110,7 +116,10 @@ export default function Navigation() {
 		},
 	]
 	return (
-		<nav className={`${styles.nav} ${navShadow ? styles.navShadow : ''}`}>
+		<nav
+			ref={navRef}
+			className={`${styles.nav} ${navShadow ? styles.navShadow : ''} ${!isHomePage ? styles.navSubpage : ''}`}
+		>
 			<Wrapper>
 				<div className={styles.nav__inner}>
 					<Logo />

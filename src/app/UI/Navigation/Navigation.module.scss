@@ -8,6 +8,9 @@
 	left: 0;
 	transition: background-color 0.3s;
 	z-index: 100;
+	&.navSubpage {
+		background-color: $black;
+	}
 	&__inner {
 		display: flex;
 		align-items: center;

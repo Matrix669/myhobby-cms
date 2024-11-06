@@ -1,5 +1,6 @@
 import Footer from './UI/Footer/Footer'
 import Navigation from './UI/Navigation/Navigation'
+import NavHeightProvider from './components/contexts/NavHeightContext'
 import './globals.scss'
 import { Montserrat } from 'next/font/google'
 
@@ -12,7 +13,7 @@ const montserrat = Montserrat({
 export const metadata = {
 	title: {
 		template: '%s | myHobby',
-		default: 'myHobby'
+		default: 'myHobby',
 	},
 	description: 'myHobby but it is connected to Wordpress cms',
 }
@@ -21,9 +22,11 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang='pl'>
 			<body className={montserrat.className}>
-				<Navigation />
-				{children}
-				<Footer />
+				<NavHeightProvider>
+					<Navigation />
+					{children}
+					<Footer />
+				</NavHeightProvider>
 			</body>
 		</html>
 	)
