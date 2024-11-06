@@ -16,30 +16,31 @@ export default function ContactForm() {
 		mode: 'all',
 	})
 	const [fadeOut, setFadeOut] = useState(false)
+	const [animationError, setAnimationError] = useState(true)
 	const emailValue = watch('email', '')
 
 	function onSubmit(data) {
 		try {
+			// throw new Error('Backhand error')
 			console.log(data)
 			setTimeout(() => {
 				setFadeOut(true)
-				reset()
 			}, 2500)
+
+			reset()
 		} catch (e) {
-			setTimeout(() => {
-				setFadeOut(true)
-				setError('general', {
-					message: 'Błąd wysyłania wiadomości',
-					type: 'custom',
-				})
-				// reset()
-			}, 2500)
+			if (!e) {
+				setTimeout(() => {
+					setFadeOut(true)
+				}, 2500)
+			}
+			setError('general', {
+				message: 'Błąd wysyłania wiadomości',
+				type: 'custom',
+			})
 		}
 		setFadeOut(false)
-		reset()
-		// throw new Error('backhand error')
 	}
-	console.log(isSubmitSuccessful)
 	return (
 		<Wrapper>
 			<form onSubmit={handleSubmit(onSubmit)} className={styles.form} noValidate>
@@ -87,21 +88,30 @@ export default function ContactForm() {
 					<label htmlFor='msg'>Wiadomość*</label>
 				</div>
 				{errors.message && <span className={styles.formError}>{errors.message.message}</span>}
-				<button>Wyślij</button>
-				<span
-					className={`${styles.formSubmittedText}
-				 ${isSubmitSuccessful ? styles.bounceInLeft : ''} ${fadeOut ? styles.fadeOut : ''}`}
+				<button
+					onClick={() => {
+						setAnimationError(error => !error)
+					}}
 				>
-					Wiadomość została wysłana
-				</span>
-				{/* {errors.general && (
+					Wyślij
+				</button>
+				{isSubmitSuccessful && (
+					<span
+						className={`${styles.formSubmittedText}
+				 ${isSubmitSuccessful ? styles.bounceInLeft : ''} ${fadeOut ? styles.fadeOut : ''}`}
+					>
+						Wiadomość została wysłana
+					</span>
+				)}
+				{errors.general && (
 					<span
 						className={`${styles.formTextError}
-				 ${isSubmitSuccessful ? styles.bounceInLeft : ''} ${fadeOut ? styles.fadeOut : ''}`}
+				 ${styles.bounceInLeft}
+				  ${fadeOut ? styles.fadeOut : ''} ${animationError ? styles.bouncing : ''}`}
 					>
 						{errors.general.message}
 					</span>
-				)} */}
+				)}
 			</form>
 		</Wrapper>
 	)
