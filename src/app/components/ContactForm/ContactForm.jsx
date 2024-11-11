@@ -2,7 +2,8 @@
 import Wrapper from '@/app/UI/Wrapper/Wrapper'
 import styles from './ContactForm.module.scss'
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
+import Toast from '@/app/UI/Toast/Toast'
+import { toast } from 'sonner'
 
 export default function ContactForm() {
 	const {
@@ -15,31 +16,22 @@ export default function ContactForm() {
 	} = useForm({
 		mode: 'all',
 	})
-	const [fadeOut, setFadeOut] = useState(false)
-	const [animationError, setAnimationError] = useState(true)
 	const emailValue = watch('email', '')
-
+	
 	function onSubmit(data) {
 		try {
-			// throw new Error('Backhand error')
+			// throw new Error('backhand error')
 			console.log(data)
-			setTimeout(() => {
-				setFadeOut(true)
-			}, 2500)
-
+			toast.success('Wiadomość została wysłana')
 			reset()
 		} catch (e) {
-			if (!e) {
-				setTimeout(() => {
-					setFadeOut(true)
-				}, 2500)
-			}
+			toast.error('Wystąpił błąd')
 			setError('general', {
 				message: 'Błąd wysyłania wiadomości',
 				type: 'custom',
 			})
 		}
-		setFadeOut(false)
+		
 	}
 	return (
 		<section className={styles.sectionPadding} id='kontakt'>
@@ -89,30 +81,17 @@ export default function ContactForm() {
 						<label htmlFor='msg'>Wiadomość*</label>
 					</div>
 					{errors.message && <span className={styles.formError}>{errors.message.message}</span>}
-					<button
-						onClick={() => {
-							setAnimationError(error => !error)
-						}}
-					>
-						Wyślij
-					</button>
-					{isSubmitSuccessful && (
-						<span
-							className={`${styles.formSubmittedText}
-				 ${isSubmitSuccessful ? styles.bounceInLeft : ''} ${fadeOut ? styles.fadeOut : ''}`}
+					{errors.general && <span className={styles.formError}>{errors.general.message}</span>}
+
+					{/* <>
+						<Toaster richColors position='bottom-right' expand={true} />
+						<button
+							onClick={() => (catchError ? toast.error('Wystąpił błąd') : toast.success('Wiadomość została wysłana'))}
 						>
-							Wiadomość została wysłana
-						</span>
-					)}
-					{errors.general && (
-						<span
-							className={`${styles.formTextError}
-				 ${styles.bounceInLeft}
-				  ${fadeOut ? styles.fadeOut : ''} ${animationError ? styles.bouncing : ''}`}
-						>
-							{errors.general.message}
-						</span>
-					)}
+							Wyślij
+						</button>
+					</> */}
+					<Toast>Wyślij</Toast>
 				</form>
 			</Wrapper>
 		</section>
