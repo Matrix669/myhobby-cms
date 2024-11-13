@@ -1,0 +1,55 @@
+@use '../../../styles/colors' as *;
+@use '../../../styles/functions' as *;
+.task {
+	padding: rem(28);
+	margin: rem(32);
+	border: 3px dashed $deep-heaven;
+	& h2 {
+        position: relative;
+		text-transform: uppercase;
+		font-weight: 300;
+		letter-spacing: 2px;
+		font-size: rem(20);
+		color: $black;
+        &::after, &::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: $on-hover;
+            transition: width .3s;
+        }
+        &::before {
+            bottom: -10px;
+            right: 5%;
+        }
+        &::after {
+            top: -10px;
+            left: 5%;
+        }
+	}
+    &:hover {
+        border-color: $gray;
+        & h2 {
+            &::after, &::before {
+                width: rem(100);
+            }
+        }
+    }
+}
+@media (min-width: rem(576)) {
+	.task {
+		width: rem(320);
+		& h2 {
+			font-size: rem(24);
+		}
+	}
+}
+
+@media (min-width: rem(768)) {
+	.task {
+		& h2 {
+			font-size: rem(24);
+		}
+	}
+}

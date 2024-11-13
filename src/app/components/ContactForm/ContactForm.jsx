@@ -9,7 +9,7 @@ export default function ContactForm() {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors, isSubmitSuccessful },
+		formState: { errors },
 		watch,
 		reset,
 		setError,
