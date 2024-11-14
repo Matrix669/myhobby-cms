@@ -1,3 +1,48 @@
+@use '../../../styles/functions' as *;
+@use '../../../styles/colors' as *;
+
 .project {
-    
+	margin: rem(55) 0;
+	text-align: center;
+	box-shadow: 1px 1px 8px 3px #00000045;
+    transition: transform .3s, box-shadow .3s;
+    &:hover {
+        transform: scale(.96);
+        box-shadow: 1px 1px 20px 10px rgba(39, 76, 119, 0.45);
+        & h2 {
+            letter-spacing: 5px;
+            border-color: $black;
+            color: $deep-heaven;
+        }
+    }
+	&:first-child {
+		margin-top: 0;
+	}
+	& h2 {
+		font-weight: 300;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		font-size: rem(20);
+		padding: rem(15);
+		border: 2px dashed $deep-heaven;
+        transition: letter-spacing .3s, color .3s, border-color .3s;
+	}
+}
+
+@media (min-width: rem(576)) {
+	.project {
+		& h2 {
+			font-size: rem(26);
+		}
+	}
+}
+
+@media (min-width: rem(1200)) {
+	.project {
+		display: inline-block;
+        & img {
+            height: rem(555);
+            object-fit: cover;
+        }
+	}
 }

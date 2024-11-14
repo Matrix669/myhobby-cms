@@ -7,8 +7,9 @@ import styles from './Navigation.module.scss'
 import Wrapper from '../Wrapper/Wrapper'
 import Logo from '../Logo/Logo'
 import BurgerBtn from '../BurgerBtn/BurgerBtn'
-import { useNavHeight } from '@/app/components/contexts/NavHeightContext'
+import { useNavHeight } from '@/app/contexts/NavHeightContext'
 import { usePathname } from 'next/navigation'
+import { NAV_LINKS } from '@/app/constants/links'
 
 export default function Navigation() {
 	const [activeMobileMenu, setActiveMenu] = useState(false)
@@ -27,9 +28,7 @@ export default function Navigation() {
 		setDropDownMobile(prev => (prev === dropdownId ? null : dropdownId))
 	}
 
-	function closeMobileMenu() {
-		setActiveMenu(false)
-	}
+
 
 	useEffect(() => {
 		const handleShadowNav = () => {
@@ -45,127 +44,18 @@ export default function Navigation() {
 			window.removeEventListener('scroll', handleShadowNav)
 		}
 	}, [])
-	const mobileNav = [
-		{
-			name: 'Hobby',
-			href: '/',
-			dropdownLinks: [
-				{
-					name: 'Badminton',
-					href: '/#badminton',
-					onClick: closeMobileMenu,
-				},
-				{
-					name: 'Piłka nożna',
-					href: '/#pilka-nozna',
-					onClick: closeMobileMenu,
-				},
-				{
-					name: 'Programowanie',
-					href: '/#programowanie',
-					onClick: closeMobileMenu,
-				},
-			],
-		},
-		{
-			name: 'Moje projekty',
-			href: '/moje-projekty',
-			onClick: closeMobileMenu,
-		},
-		{
-			name: 'Zadania',
-			href: '/zadania',
-			onClick: closeMobileMenu,
-		},
-		{
-			name: 'Kontakt',
-			href: '/#kontakt',
-			onClick: closeMobileMenu,
-		},
-	]
-	const desktopNav = [
-		{
-			name: 'Hobby',
-			href: '/',
-			dropdownLinks: [
-				{
-					name: 'Badminton',
-					href: '/#badminton',
-				},
-				{
-					name: 'Piłka nożna',
-					href: '/#pilka-nozna',
-				},
-				{
-					name: 'Programowanie',
-					href: '/#programowanie',
-				},
-			],
-		},
-		{
-			name: 'Moje projekty',
-			href: '/moje-projekty',
-		},
-		{
-			name: 'Zadania',
-			href: '/zadania',
-		},
-		{
-			name: 'Kontakt',
-			href: '/#kontakt',
-		},
-	]
+
 	return (
 		<nav
 			ref={navRef}
-			className={`${styles.nav} ${navShadow ? styles.navShadow : ''} ${!isHomePage ? styles.navSubpage : ''}`}
+			className={`${styles.nav} ${isHomePage && navShadow ? styles.navShadow : ''} ${!isHomePage ? styles.navSubpage : ''}`}
 		>
 			<Wrapper>
 				<div className={styles.nav__inner}>
 					<Logo />
-					{/* <ul className={`${styles.navMobile} ${activeMobileMenu ? styles.navActive : ''}`}>
-						<li>
-							<Link onClick={() => toggleDropdown('dropdown1')} className={styles.navDropdownLink} href={'/'}>
-								Hobby <RiArrowDropDownLine size='2em' />
-							</Link>
-							{activeDropDownMobile === 'dropdown1' && (
-								<ul>
-									<li>
-										<Link onClick={closeMobileMenu} href={'#badminton'}>
-											Badminton
-										</Link>
-									</li>
-									<li>
-										<Link onClick={closeMobileMenu} href={'#pilka-nozna'}>
-											Piłka Nożna
-										</Link>
-									</li>
-									<li>
-										<Link onClick={closeMobileMenu} href={'#programowanie'}>
-											Programowanie
-										</Link>
-									</li>
-								</ul>
-							)}
-						</li>
-						<li>
-							<Link onClick={closeMobileMenu} href={'/'}>
-								Moje projekty
-							</Link>
-						</li>
-						<li>
-							<Link onClick={closeMobileMenu} href={'/'}>
-								Zadania
-							</Link>
-						</li>
-						<li>
-							<Link onClick={closeMobileMenu} href={'/'}>
-								Kontakt
-							</Link>
-						</li>
-					</ul> */}
+					{/* mobile menu */}
 					<ul className={`${styles.navMobile} ${activeMobileMenu ? styles.navActive : ''}`}>
-						{mobileNav.map((link, i) => {
+						{NAV_LINKS.map((link, i) => {
 							return (
 								<li key={link.name}>
 									<Link
@@ -193,35 +83,9 @@ export default function Navigation() {
 							)
 						})}
 					</ul>
-					{/* <ul className={styles.navDesktop}>
-						<li className={styles.navDesktopDropdownLi}>
-							<Link className={styles.navDropdownLink} href={'#'} onClick={e => e.preventDefault()}>
-								Hobby <RiArrowDropDownLine size='2em' />
-							</Link>
-							<ul>
-								<li>
-									<Link href={'#badminton'}>Badminton</Link>
-								</li>
-								<li>
-									<Link href={'#pilka-nozna'}>Piłka Nożna</Link>
-								</li>
-								<li>
-									<Link href={'#programowanie'}>Programowanie</Link>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<Link href={'/'}>Moje projekty</Link>
-						</li>
-						<li>
-							<Link href={'/'}>Zadania</Link>
-						</li>
-						<li>
-							<Link href={'/'}>Kontakt</Link>
-						</li>
-					</ul> */}
+					{/* desktop menu */}
 					<ul className={styles.navDesktop}>
-						{desktopNav.map(link => {
+						{NAV_LINKS.map(link => {
 							return (
 								<li key={link.name} className={link.dropdownLinks ? styles.navDesktopDropdownLi : ''}>
 									<Link className={link.dropdownLinks ? styles.navDropdownLink : ''} title={link.name} href={link.href}>

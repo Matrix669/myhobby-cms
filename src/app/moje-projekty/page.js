@@ -1,5 +1,5 @@
+import { marginBottom, navMarginTop } from '../constants/forStyles'
 import MainContent from '../UI/MainContent/MainContent'
-import { marginBottom, navMarginTop } from '../zadania/page'
 import MyProjects from './components/MyProjects/MyProjects'
 
 export const metadata = {
