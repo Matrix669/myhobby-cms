@@ -7,7 +7,6 @@ import styles from './Navigation.module.scss'
 import Wrapper from '../Wrapper/Wrapper'
 import Logo from '../Logo/Logo'
 import BurgerBtn from '../BurgerBtn/BurgerBtn'
-import { useNavHeight } from '@/app/contexts/NavHeightContext'
 import { usePathname } from 'next/navigation'
 import { NAV_LINKS } from '@/app/constants/links'
 
@@ -15,7 +14,6 @@ export default function Navigation() {
 	const [activeMobileMenu, setActiveMenu] = useState(false)
 	const [activeDropDownMobile, setDropDownMobile] = useState(null)
 	const [navShadow, setNavShadow] = useState(false)
-	const { navRef } = useNavHeight()
 	const pathname = usePathname()
 	const isHomePage = pathname === '/'
 
@@ -27,8 +25,6 @@ export default function Navigation() {
 	function toggleDropdown(dropdownId) {
 		setDropDownMobile(prev => (prev === dropdownId ? null : dropdownId))
 	}
-
-
 
 	useEffect(() => {
 		const handleShadowNav = () => {
@@ -47,7 +43,6 @@ export default function Navigation() {
 
 	return (
 		<nav
-			ref={navRef}
 			className={`${styles.nav} ${isHomePage && navShadow ? styles.navShadow : ''} ${!isHomePage ? styles.navSubpage : ''}`}
 		>
 			<Wrapper>
